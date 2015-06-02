@@ -76,6 +76,16 @@ extern NSString *const kSSKeychainWhereKey;
 
 
 /**
+ Returns data conaining the persistend reference to the password for given account and service
+
+ @param serviceName The service for which to return the corresponding password.
+ 
+ @param account The account for which to return the corresponding password.
+ */
++ (NSData *)persistendReferenceForService:(NSString *)serviceName account:(NSString *)account;
++ (NSData *)persistendReferenceForService:(NSString *)serviceName account:(NSString *)account error:(NSError *__autoreleasing *)error;
+
+/**
  Deletes a password from the Keychain.
 
  @param serviceName The service for which to delete the corresponding password.

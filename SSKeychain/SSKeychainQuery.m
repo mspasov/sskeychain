@@ -117,6 +117,7 @@
 	CFTypeRef result = NULL;
 	NSMutableDictionary *query = [self query];
 	[query setObject:@YES forKey:(__bridge id)kSecReturnData];
+	[query setObject:@YES forKey:(__bridge id)kSecReturnPersistentRef];
 	[query setObject:(__bridge id)kSecMatchLimitOne forKey:(__bridge id)kSecMatchLimit];
 	status = SecItemCopyMatching((__bridge CFDictionaryRef)query, &result);
 
@@ -126,8 +127,12 @@
 		}
 		return NO;
 	}
+	
+	NSDictionary *resultDict = (__bridge_transfer NSDictionary *)result;
 
-	self.passwordData = (__bridge_transfer NSData *)result;
+	self.passwordData = resultDict[@"v_Data"];
+	self.persistendReference = resultDict[@"v_PersistentRef"];
+	
 	return YES;
 }
 

@@ -36,6 +36,17 @@ NSString *const kSSKeychainWhereKey = @"svce";
 	return query.password;
 }
 
++ (NSData *)persistendReferenceForService:(NSString *)serviceName account:(NSString *)account {
+	return [self persistendReferenceForService:serviceName account:account error:nil];
+}
+
++ (NSData *)persistendReferenceForService:(NSString *)serviceName account:(NSString *)account error:(NSError *__autoreleasing *)error {
+	SSKeychainQuery *query = [[SSKeychainQuery alloc] init];
+	query.service = serviceName;
+	query.account = account;
+	[query fetch:error];
+	return query.persistendReference;
+}
 
 + (BOOL)deletePasswordForService:(NSString *)serviceName account:(NSString *)account {
 	return [self deletePasswordForService:serviceName account:account error:nil];

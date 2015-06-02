@@ -49,6 +49,9 @@ typedef NS_ENUM(NSUInteger, SSKeychainQuerySynchronizationMode) {
 /** Root storage for password information */
 @property (nonatomic, copy) NSData *passwordData;
 
+/** Storage for persistent reference */
+@property (nonatomic, copy) NSData *persistendReference;
+
 /**
  This property automatically transitions between an object and the value of
  `passwordData` using NSKeyedArchiver and NSKeyedUnarchiver.
